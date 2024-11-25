@@ -24,3 +24,4 @@ C:\GitHub\monogame\obj\Debug\net8.0-windows\refint\monogame.dll
 C:\GitHub\monogame\obj\Debug\net8.0-windows\monogame.pdb
 C:\GitHub\monogame\obj\Debug\net8.0-windows\monogame.genruntimeconfig.cache
 C:\GitHub\monogame\obj\Debug\net8.0-windows\ref\monogame.dll
+C:\GitHub\monogame\obj\Debug\net8.0-windows\monogame.sourcelink.json

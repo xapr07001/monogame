@@ -11,14 +11,13 @@ public class Game1 : Game
 
 //skärmbredd 800p skärmhöjd 400p
     Texture2D pixel;
-    Rectangle leftpaddle = new Rectangle(x:10,y:200,width:20,height:100);
+    Ball ball;
+    Paddle paddleright;
+    Paddle paddleleft;
 
-    Rectangle rightpaddle = new Rectangle(x:770,y:200,width:20,height:100);
 
-    Rectangle ball = new Rectangle(390,230,20,20);
 
-    int ballXVelocity = 5;
-    int ballYVelocity = 1;
+
 
 
 
@@ -43,7 +42,9 @@ public class Game1 : Game
 
         pixel = new Texture2D(GraphicsDevice,1,1);
         pixel.SetData(new Color[]{Color.White});
-
+        ball = new Ball(pixel);
+        paddleright = new Paddle(pixel,780,200,Keys.Up,Keys.Down);
+        paddleleft = new Paddle(pixel,0,200,Keys.W,Keys.S);
         // TODO: use this.Content to load your game content here
     }
 
@@ -52,37 +53,17 @@ public class Game1 : Game
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
 
+
         // TODO: Add your update logic here
 
-        KeyboardState kState = Keyboard.GetState();
-        if(kState.IsKeyDown(Keys.W) && leftpaddle.Y > 0){
-            leftpaddle.Y -= 4;
-        }
-        if(kState.IsKeyDown(Keys.S) && leftpaddle.Y < 400){
-            leftpaddle.Y += 4;
-        }
-        if(kState.IsKeyDown(Keys.Up) && rightpaddle.Y > 0){
-            rightpaddle.Y -= 4;
-        }
-        if(kState.IsKeyDown(Keys.Down) && rightpaddle.Y < 400){
-            rightpaddle.Y += 4;
-        }
-        
-        ball.X += ballXVelocity;
-        ball.Y += ballYVelocity;
-        if(rightpaddle.Intersects(ball) || leftpaddle.Intersects(ball)){
-            ballXVelocity *= -1;
-        }
-        if(ball.Y < 0 || ball.Y > 460){
-            ballYVelocity *= -1;
-        }
 
-        if(ball.X < 0 || ball.X > 780){
-            ball.X = 390;
-            ball.Y = 230;
+        paddleright.Update();
+        paddleleft.Update(); 
+        ball.Update();
+
+        if(ball.Rectangle.Intersects(paddleleft.Rectangle) || ball.Rectangle.Intersects(paddleright.Rectangle)){
+            ball.PaddleBounce();
         }
-        
-   
 
         base.Update(gameTime);
     }
@@ -93,9 +74,10 @@ public class Game1 : Game
 
         // TODO: Add your drawing code here
         _spriteBatch.Begin();
-        _spriteBatch.Draw(pixel,leftpaddle,Color.White);
-        _spriteBatch.Draw(pixel,rightpaddle,Color.White);
-        _spriteBatch.Draw(pixel,ball,Color.White);
+        
+        ball.Draw(_spriteBatch);
+        paddleright.Draw(_spriteBatch);
+        paddleleft.Draw(_spriteBatch);
         _spriteBatch.End();
         base.Draw(gameTime);
     }
