@@ -47,7 +47,9 @@ namespace monogame
                 speed -= 0.1;
             }
 
-            ile(kState.IsKeyUp(down) || kState.IsKeyDown(up)){speed = 0;}
+            while(kState.IsKeyUp(down) || kState.IsKeyDown(up)){
+                speed = 0;
+            }
 
 
 
