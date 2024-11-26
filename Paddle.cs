@@ -16,6 +16,7 @@ namespace monogame
         private Texture2D texture;
         
 
+
         private Keys up;
         private Keys down;
 
@@ -37,31 +38,16 @@ namespace monogame
         public void Update(){
             KeyboardState kState = Keyboard.GetState();
 
-
-            
-            if(kState.IsKeyDown(down) || kState.IsKeyDown(up) && speed < 5){
+            if(kState.IsKeyDown(up) || kState.IsKeyDown(down) && speed < 5){
                 speed += 0.1;
-
-
-            }else if(speed > 0){
+            }else if(speed <= 0 || kState.IsKeyDown(Keys.None)){
                 speed -= 0.1;
             }
 
-            while(kState.IsKeyUp(down) || kState.IsKeyDown(up)){
-                speed = 0;
-            }
 
 
+            rectangle.Y -= Convert.ToInt16(speed);
 
-
-
-
-            if(kState.IsKeyDown(up) && rectangle.Y > 0){
-                rectangle.Y -= Convert.ToInt16(speed);
-            }
-            if(kState.IsKeyDown(down) && rectangle.Y < 400){
-                rectangle.Y += Convert.ToInt16(speed);
-            }
 
 
 
