@@ -38,14 +38,17 @@ namespace monogame
         public void Update(){
             KeyboardState kState = Keyboard.GetState();
 
-            if(kState.IsKeyDown(up) || kState.IsKeyDown(down) && speed < 5){
-                speed += 0.1;
-            }else if(speed <= 0 || kState.IsKeyDown(Keys.None)){
+            if(kState.IsKeyDown(up) && speed < 5){
+                speed += 0.25;
+            }else if(speed >= 0 || kState.IsKeyDown(Keys.None)){
                 speed -= 0.1;
             }
-
-
-
+            
+            if(kState.IsKeyDown(down) && speed > -5){
+                speed -= 0.25;
+            }else if(speed <= 0 || kState.IsKeyDown(Keys.None)){
+                speed += 0.1;
+            }
             rectangle.Y -= Convert.ToInt16(speed);
 
 
