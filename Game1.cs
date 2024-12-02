@@ -63,6 +63,7 @@ public class Game1 : Game
 
         if(ball.Rectangle.Intersects(paddleleft.Rectangle) || ball.Rectangle.Intersects(paddleright.Rectangle)){
             ball.PaddleBounce();
+            
         }
 
         base.Update(gameTime);

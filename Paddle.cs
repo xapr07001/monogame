@@ -22,6 +22,8 @@ namespace monogame
 
         private double speed;
 
+        public static double Speedbounce;
+
 
         public Rectangle Rectangle{
             get{return rectangle;}
@@ -50,6 +52,7 @@ namespace monogame
                 speed += 0.1;
             }
             rectangle.Y -= Convert.ToInt16(speed);
+            Speedbounce = speed;
 
 
 

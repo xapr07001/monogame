@@ -25,7 +25,21 @@ namespace monogame
         }
 
         public void PaddleBounce(){
-            xVelocity *= -1;
+
+
+
+
+
+
+
+            if(xVelocity < 0){
+                xVelocity =  5 + Convert.ToInt32(Math.Abs(Paddle.Speedbounce/2));
+            }else{
+                xVelocity =  -1*(5 + Convert.ToInt32(Math.Abs(Paddle.Speedbounce/2)));
+
+            }
+
+
         }
 
         public void Update(){
